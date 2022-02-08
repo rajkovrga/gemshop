@@ -1,0 +1,5 @@
+/vendor
+/docker
+/docker/*
+/configurations
+/configurations/*

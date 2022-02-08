@@ -1,0 +1,28 @@
+{
+  "name": "rajkovrga/gemshopapi",
+  "description": "project for shopping",
+  "license": "MIT",
+  "type": "project",
+  "authors": [
+    {
+      "name": "rajko",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "php-di/php-di": "^6.3",
+    "vlucas/phpdotenv": "^5.4",
+    "slim/slim": "3.*",
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "GemShopAPI\\App\\": "/app"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "GemShopAPI\\Tests\\": "/tests"
+    }
+  }
+}
