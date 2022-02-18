@@ -17,12 +17,12 @@
   },
   "autoload": {
     "psr-4": {
-      "GemShopAPI\\App\\": "/app"
+      "GemShopAPI\\App\\": "app"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "GemShopAPI\\Tests\\": "/tests"
+      "GemShopAPI\\Tests\\": "tests"
     }
   }
 }

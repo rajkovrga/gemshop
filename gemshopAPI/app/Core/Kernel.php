@@ -1,6 +1,6 @@
 <?php
 
-namespace GemShop\App\Core;
+namespace GemShopAPI\App\Core;
 
 class Kernel
 {

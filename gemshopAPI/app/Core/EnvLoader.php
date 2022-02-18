@@ -1,18 +1,21 @@
 <?php
+declare(strict_types=1);
 
-namespace GemShopApi\App\Core;
+namespace GemShopAPI\App\Core;
 
 use Dotenv\Dotenv;
 
 class EnvLoader
 {
-    public function load($path = '/configurations'): void
+    public function load($path = __DIR__ . '/configurations'): void
     {
-        $path = __DIR__ . $path;
         $files = array_diff(scandir($path), ['..', '.']);
+        var_dump($path);
+            $dotenv = Dotenv::createMutable([$path], $files);
+            $dotenv->load();
 
-        foreach ($files as $file) {
-            Dotenv::createImmutable($path, $file);
-        }
+
+
+
     }
 }
