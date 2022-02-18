@@ -1,20 +1,18 @@
 <?php
 
-namespace GemShop\App\Core;
+namespace GemShopApi\App\Core;
 
 use Dotenv\Dotenv;
-use GemShop\App\Contract\Core\ConfigLoader;
-use function PHPUnit\Framework\throwException;
 
-class EnvLoader extends ConfigLoader
+class EnvLoader
 {
-    protected function load(): void
+    public function load($path = '/configurations'): void
     {
-        $files = array_diff(scandir(__DIR__ . '/configurations'), ['..', '.']);
+        $path = __DIR__ . $path;
+        $files = array_diff(scandir($path), ['..', '.']);
 
         foreach ($files as $file) {
-            Dotenv::createImmutable(__DIR__ . '/configurations', $file);
+            Dotenv::createImmutable($path, $file);
         }
-        
     }
 }
