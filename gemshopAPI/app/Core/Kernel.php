@@ -2,19 +2,34 @@
 
 namespace GemShopAPI\App\Core;
 
+use Slim\App;
+
 class Kernel
 {
+    protected App $app;
 
-    protected function setup(): Kernel
+    public function __construct(App $app)
     {
+        $this->app = $app;
+    }
 
+    protected $middlewares = [];
+
+    public function setup(): static
+    {
 
         return $this;
     }
 
-    protected function routes(): Kernel
+    public function routes(): Kernel
     {
 
         return $this;
+    }
+
+    public function run(): void
+    {
+        $this->setup();
+        $this->app->run();
     }
 }
