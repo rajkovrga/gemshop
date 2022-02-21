@@ -1,6 +1,6 @@
 <?php
 
-namespace GemShopAPI\Tests\E2E\Core;
+namespace GemShopAPI\Tests\Core;
 
 use GemShopAPI\App\Core\EnvLoader;
 use PHPUnit\Framework\TestCase;
@@ -16,8 +16,8 @@ class EnvLoaderTest extends TestCase
 
     public function test_load_config()
     {
-        $this->envLoader->load(__DIR__ . '/data');
+        $this->envLoader->load('/data');
 
-        $this->assertEquals('test_value', $_ENV['testt']);
+        $this->assertEquals('test_value', getenv('TEST') . 'aa');
     }
 }
