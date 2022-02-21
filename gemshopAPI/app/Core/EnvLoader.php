@@ -10,12 +10,8 @@ class EnvLoader
     public function load($path = __DIR__ . '/configurations'): void
     {
         $files = array_diff(scandir($path), ['..', '.']);
-        var_dump($path);
-            $dotenv = Dotenv::createMutable([$path], $files);
-            $dotenv->load();
 
-
-
-
+        $dotenv = Dotenv::createMutable([$path], $files);
+        $dotenv->load();
     }
 }

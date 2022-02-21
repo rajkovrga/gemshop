@@ -21,8 +21,17 @@ class DILoader
 
     public function getAllDefinitions(): array
     {
+        $defs = [];
+        $path = __DIR__ . '/di';
+        $files = array_diff(scandir($path), ['.', '..']);
 
-        return [];
+        foreach ($files as $file)
+        {
+            $req = require $path . '/' . $file;
+            $defs = array_merge($defs, $req);
+        }
+
+        return $defs;
     }
 
     /**
@@ -31,7 +40,8 @@ class DILoader
      */
     public function load(): ContainerInterface
     {
-
+        $this->builder->useAnnotations(true);
+        $this->builder->useAutowiring(true);
         $defs = $this->getAllDefinitions();
         return $this->builder->addDefinitions($defs)->build();
     }

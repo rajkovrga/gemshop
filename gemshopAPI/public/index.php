@@ -13,6 +13,7 @@ $containers = (new DILoader())->load();
 
 $app = Bridge::create();
 
-(new Kernel($app))->routes()->run();
-
+(new Kernel($app))
+    ->setup()
+    ->run();
 
