@@ -14,15 +14,19 @@ class DILoader
 
     private ContainerBuilder $builder;
 
-    #[Pure] public function __construct()
+    public function getAllDefinitions($path = '/di'): array
     {
-        $this->builder = new ContainerBuilder();
-    }
+        $files = scandir($path);
+        $defs = [];
+        foreach ($files as $file) {
+            if(preg_match('\.php$', $file))
+            {
+                $data = require $path . '/' . $file;
+                $defs = array_merge($defs, $data);
+            }
+        }
 
-    public function getAllDefinitions(): array
-    {
-
-        return [];
+        return $defs;
     }
 
     /**
@@ -31,6 +35,9 @@ class DILoader
      */
     public function load(): ContainerInterface
     {
+        $this->builder = new ContainerBuilder();
+
+        $this->builder->useAutowiring(true);
 
         $defs = $this->getAllDefinitions();
         return $this->builder->addDefinitions($defs)->build();

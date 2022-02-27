@@ -13,9 +13,5 @@ class EnvLoader
         var_dump($path);
             $dotenv = Dotenv::createMutable([$path], $files);
             $dotenv->load();
-
-
-
-
     }
 }
