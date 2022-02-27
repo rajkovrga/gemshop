@@ -15,7 +15,8 @@ use Slim\Routing\RouteCollectorProxy;
 
 class Kernel
 {
-    protected App $app;
+    private App $app;
+    private array $routes;
 
     public function __construct(App $app)
     {
@@ -26,12 +27,12 @@ class Kernel
 
     public function setup(): static
     {
-
         return $this;
     }
 
     public function routes(): Kernel
     {
+<<<<<<< HEAD
         $controllers = $this->getDirContents(__DIR__ . '/controllers');
 
         foreach ($controllers as $controller)
@@ -82,6 +83,15 @@ class Kernel
 
 
             }
+=======
+        $path = __DIR__ . '/di';
+        $files = array_diff(scandir($path), ['..', '.']);
+
+        foreach ($files as $file)
+        {
+            $req = require $path . '/' . $file;
+            $defs = array_merge($defs, $req);
+>>>>>>> b0962409af342fb5ee92b8b7cf0ad9f6f813736c
         }
 
         return $this;
