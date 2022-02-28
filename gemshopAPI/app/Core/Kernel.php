@@ -32,7 +32,6 @@ class Kernel
 
     public function routes(): Kernel
     {
-<<<<<<< HEAD
         $controllers = $this->getDirContents(__DIR__ . '/controllers');
 
         foreach ($controllers as $controller)
@@ -83,15 +82,6 @@ class Kernel
 
 
             }
-=======
-        $path = __DIR__ . '/di';
-        $files = array_diff(scandir($path), ['..', '.']);
-
-        foreach ($files as $file)
-        {
-            $req = require $path . '/' . $file;
-            $defs = array_merge($defs, $req);
->>>>>>> b0962409af342fb5ee92b8b7cf0ad9f6f813736c
         }
 
         return $this;
