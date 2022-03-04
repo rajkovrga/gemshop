@@ -2,10 +2,10 @@
 
 namespace GemShopAPI\App;
 
-
-class Kernel extends \GemShopAPI\App\Core\Kernel
+class  Kernel extends Core\Kernel
 {
 
-    protected $middlewares = [];
+    protected array $middlewares = [
+    ];
 
 }

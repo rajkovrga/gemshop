@@ -14,10 +14,10 @@ class EnvLoaderTest extends TestCase
         parent::setUp();
     }
 
-    public function test_load_config()
+    public function test_load_config(): void
     {
-        $this->envLoader->load('/data');
+        $this->envLoader->load(__DIR__ . '/data');
 
-        $this->assertEquals('test_value', getenv('TEST') . 'aa');
+        $this->assertEquals('test_value', $_ENV['TEST']);
     }
 }
