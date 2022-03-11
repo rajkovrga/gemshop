@@ -11,10 +11,16 @@ use Psr\Http\Message\ResponseInterface as Response;
 class AuthController
 {
 
-    #[GetMethod('/login/:id')]
+    #[GetMethod('/login/{id}/{kt}')]
     public function login(Request $request, Response $response, $id): Response
     {
-        echo "login" . $id;
-        return $response->withStatus(202);
+        return $response->withStatus(201);
+    }
+
+    #[PutMethod('/update/{id}')]
+    public function update(Request $request, Response $response, $id): Response
+    {
+
+        return $response->withStatus(204);
     }
 }
