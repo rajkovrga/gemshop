@@ -7,7 +7,7 @@ use Attribute;
 #[Attribute(\Attribute::TARGET_METHOD)]
 class PostMethod
 {
-    public function __construct(string $path)
+    public function __construct(string $path, array $middlewares = [])
     {
     }
 }
