@@ -21,8 +21,6 @@ class Kernel
      */
     public function routes(): Kernel
     {
-        var_dump(dirname(__DIR__));
-        var_dump(dirname(__DIR__, 2));
         $controllers = $this->getDirContents(__DIR__ . '/../Controllers');
         foreach ($controllers as $controller) {
             if (preg_match('/Controller.php$/', $controller)) {
