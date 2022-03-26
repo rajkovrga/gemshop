@@ -8,7 +8,7 @@ use Attribute;
 class DeleteMethod
 {
 
-    public function __construct(string $path)
+    public function __construct(string $path, array $middlewares = [])
     {
     }
 }

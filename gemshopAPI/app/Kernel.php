@@ -2,10 +2,13 @@
 
 namespace GemShopAPI\App;
 
-class  Kernel extends Core\Kernel
+use GemShopAPI\App\Middlewares\AuthMiddleware;
+
+class Kernel extends Core\Kernel
 {
 
     protected array $middlewares = [
+        'auth' => AuthMiddleware::class
     ];
 
     protected array $globalMiddlewares = [

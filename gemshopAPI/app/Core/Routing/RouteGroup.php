@@ -3,17 +3,16 @@
 namespace GemShopAPI\App\Core\Routing;
 
 use Attribute;
-use GemShopAPI\App\Middleware;
 
 #[Attribute(\Attribute::TARGET_CLASS)]
 class RouteGroup
 {
+
     /**
      * @param string $group
-     * @param array<Middleware> $middleware
+     * @param array $middlewares
      */
-    public function __construct(string $group, array $middleware)
+    public function __construct(string $group, array $middlewares = [])
     {
-        $middleware  = Middleware::Auth;
     }
 }
