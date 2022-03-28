@@ -13,5 +13,5 @@ use GemShopAPI\App\Kernel;
 
 $app = Bridge::create($containers);
 
-    (new Kernel($app))->routes()->run();
+    (new Kernel($app, $containers))->routes()->run();
 

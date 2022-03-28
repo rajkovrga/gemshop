@@ -3,7 +3,13 @@
 namespace GemShopAPI\App\Core;
 
 use GemShopAPI\App\Core\Routing\{DeleteMethod, GetMethod, PostMethod, PutMethod, RouteGroup};
+use DI\Container;
+use DI\DependencyException;
+use DI\NotFoundException;
+use GemShopAPI\App\Exceptions\Handler;
 use GemShopAPI\App\Exceptions\MiddlewareException;
+use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 use ReflectionClass;
 use ReflectionException;
 use Slim\App;
@@ -16,7 +22,10 @@ class Kernel
     protected array $middlewares = [];
     protected array $globalMiddlewares = [];
 
-    public function __construct(private readonly App $app)
+    public function __construct(
+        private readonly App $app,
+        private readonly Container $containers
+    )
     {
     }
 
@@ -79,11 +88,12 @@ class Kernel
      * @throws MiddlewareException
      */
     private function registerRoute(
-        array $methods,
-        string $namespace,
+        array               $methods,
+        string              $namespace,
         RouteCollectorProxy $group,
-        array $middlewares = []
-    ): void {
+        array               $middlewares = []
+    ): void
+    {
         foreach ($methods as $method) {
             $attributes = $method->getAttributes();
             foreach ($attributes as $attribute) {
@@ -114,16 +124,32 @@ class Kernel
         }
     }
 
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
     public function run(): void
     {
-        $this->setup();
+        $this->setup($this->containers->get(Logger::class));
         $this->app->run();
     }
 
-    public function setup(): static
+    public function setup(LoggerInterface $logger = null): static
     {
         $this->app->addRoutingMiddleware();
         $this->app->addBodyParsingMiddleware();
+
+        $errorMiddleware = $this->app->addErrorMiddleware(
+            true,
+            true,
+            true
+        );
+
+        $errorMiddleware->setDefaultErrorHandler(new Handler(
+            $this->app->getCallableResolver(),
+            $this->app->getResponseFactory(),
+            $logger
+        ));
 
         if (!empty($this->globalMiddlewares)) {
             foreach ($this->globalMiddlewares as $m) {
